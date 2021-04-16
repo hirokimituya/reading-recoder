@@ -1,4 +1,5 @@
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
+require('vuetifyjs-mix-extension')
 
 /*
  |--------------------------------------------------------------------------
@@ -11,12 +12,10 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').vue()
-    .postCss('resources/css/app.css', 'public/css', [
-        require('tailwindcss'),
-    ])
-    .webpackConfig(require('./webpack.config'));
-
-if (mix.inProduction()) {
-    mix.version();
-}
+mix.browserSync('reading-recoder.test')
+    .js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .vuetify('vuetify-loader')
+    .vue()
+    .webpackConfig(require('./webpack.config'))
+    .version()
