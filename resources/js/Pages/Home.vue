@@ -18,6 +18,17 @@
             :next-icon="mdiChevronRight"
             :prev-icon="mdiChevronLeft"
         ></v-pagination>
+
+        <v-snackbar
+          v-model="success"
+          right
+          top
+          :timeout="4000"
+          color="green"
+        >
+          <h4 class="h4">Reading Recoder</h4>
+          <p>読書情報の登録／更新に成功しました。</p>
+        </v-snackbar>
     </layout>
 </template>
 
@@ -48,12 +59,17 @@ export default {
         per_page: {
             type: Number,
             default: 15,
-        }
+        },
+        snackbar: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
             mdiChevronRight, mdiChevronLeft,
             page_data: this.prop,
+            success: this.snackbar,
         }
     },
     computed:{

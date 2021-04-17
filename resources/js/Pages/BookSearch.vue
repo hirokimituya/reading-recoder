@@ -1,8 +1,8 @@
 <template>
   <layout>
     <!-- 検索フォームの定義 -->
-    <v-row class="mt-1">
-      <v-col cols="8" sm="6" md="4">
+    <v-row class="mt-1 ml-lg-16">
+      <v-col cols="8" sm="6" md="4" lg="3">
         <v-text-field 
           label="キーワード"
           v-model="keyword"
@@ -63,6 +63,7 @@ export default {
     return {
       mdiChevronRight, mdiChevronLeft,
       keyword: 'vue.js',
+      keyword_change_flg: false,
       books: [],
       progress: false,
       page: 1,
@@ -79,6 +80,11 @@ export default {
       this.progress = true
 
       this.books = []
+
+      if (this.keyword_change_flg) {
+        this.page = 1
+        this.keyword_change_flg = false
+      }
 
       const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${this.keyword}&startIndex=${this.index}`)
 
@@ -109,6 +115,9 @@ export default {
     page() {
       this.search()
       this.scrollToTop()
+    },
+    keyword() {
+      this.keyword_change_flg = true
     }
   }
 }

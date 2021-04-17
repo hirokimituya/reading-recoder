@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Book;
+use App\Models\Comment;
 use Illuminate\Database\Seeder;
 
 class BookSeeder extends Seeder
@@ -14,6 +15,8 @@ class BookSeeder extends Seeder
      */
     public function run()
     {
-        Book::factory()->count(50)->create();
+        Book::factory()
+            ->has(Comment::factory()->count(3))
+            ->create();
     }
 }

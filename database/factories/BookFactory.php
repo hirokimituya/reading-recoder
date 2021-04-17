@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Book;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookFactory extends Factory
@@ -22,6 +23,7 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
+            'id' => Str::random(12),
             'title' => 'Vue.js&Nuxt.js超入門',
             'price' => random_int(1000, 7000),
             'author' => $this->faker->name,

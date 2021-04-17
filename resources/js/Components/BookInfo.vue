@@ -1,22 +1,26 @@
 <template>
-  <v-card class="mx-auto mt-5" :class="{ linkable }" @click="onclick">
-    <v-row justify="space-between" align="center">
-      <v-col cols="4" md="2">
-        <v-img 
-          :src="book.image"
-        ></v-img>
-      </v-col>
-      <v-col cols="8" md="9">
-        <ul>
-          <li v-if="index">{{ index }}.</li>
-          <li>{{ book.title }}（{{ book.price }}円）</li>
-          <li>{{ book.author }} 著</li>
-          <li>{{ book.publisher }} /刊</li>
-          <li>{{ book.published }} /発売</li>
-        </ul>
-      </v-col>
-    </v-row>
-  </v-card>
+  <v-row justify="center">
+    <v-col cols="12" lg="10">
+      <v-card class="mx-auto mt-5" @click="onclick" :disabled="!linkable">
+        <v-row justify="space-between" align="center">
+          <v-col cols="4" md="2">
+            <v-img 
+              :src="book.image"
+            ></v-img>
+          </v-col>
+          <v-col cols="8" md="9">
+            <ul>
+              <li v-if="index">{{ index }}.</li>
+              <li>{{ book.title }}（{{ book.price }}円）</li>
+              <li>{{ book.author }} 著</li>
+              <li>{{ book.publisher }} /刊</li>
+              <li>{{ book.published }} /発売</li>
+            </ul>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -37,7 +41,7 @@ export default {
   methods: {
     onclick() {
       if (this.linkable) {
-        this.$inertia.get(route('form', ['book', this.book.id]))
+        this.$inertia.get(route('form'), this.book)
       }
     }
   }
