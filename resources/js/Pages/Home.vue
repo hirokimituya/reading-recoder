@@ -1,24 +1,23 @@
 <template>
     <layout>
-        <v-container>
-            <p>{{ bookCount }}件の読書情報が記録されています。</p>
-            <!-- 読書情報を一覧表示（キーはid）-->
-            <book-info
-                v-for="(b, i) of books"
-                :linkable="true"
-                :book="b"
-                :index="i + 1"
-                :key="b.id"
-            ></book-info>
-            <!-- ページャを生成 -->
-            <v-pagination
-                v-model="page"
-                class="mt-5"
-                :length="pageCount"
-                :next-icon="mdiChevronRight"
-                :prev-icon="mdiChevronLeft"
-            ></v-pagination>
-        </v-container>
+        <p>{{ bookCount }}件の読書情報が記録されています。</p>
+        <!-- 読書情報を一覧表示（キーはid）-->
+        <book-info
+            v-for="(b, i) of books"
+            :linkable="true"
+            :book="b"
+            :index="i + 1"
+            :key="b.id"
+        ></book-info>
+        <!-- ページャを生成 -->
+        <v-pagination
+            v-model="page_data"
+            class="mt-5"
+            :length="pageCount"
+            :total-visible="10"
+            :next-icon="mdiChevronRight"
+            :prev-icon="mdiChevronLeft"
+        ></v-pagination>
     </layout>
 </template>
 
@@ -54,6 +53,7 @@ export default {
     data() {
         return {
             mdiChevronRight, mdiChevronLeft,
+            page_data: this.prop,
         }
     },
     computed:{
@@ -62,7 +62,7 @@ export default {
         }
     },
     watch: {
-        page(val) {
+        page_data(val) {
             this.$inertia.get(route('home'), {
                 'page': val,
             })

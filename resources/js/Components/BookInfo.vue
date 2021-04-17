@@ -1,15 +1,14 @@
 <template>
   <v-card class="mx-auto mt-5" :class="{ linkable }" @click="onclick">
-    <v-row justify="space-between">
+    <v-row justify="space-between" align="center">
       <v-col cols="4" md="2">
         <v-img 
           :src="book.image"
-          max-height="300"
         ></v-img>
       </v-col>
       <v-col cols="8" md="9">
         <ul>
-          <li v-if="index">{{ book.id }}.</li>
+          <li v-if="index">{{ index }}.</li>
           <li>{{ book.title }}（{{ book.price }}円）</li>
           <li>{{ book.author }} 著</li>
           <li>{{ book.publisher }} /刊</li>

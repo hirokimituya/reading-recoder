@@ -60,7 +60,9 @@
     </v-app-bar>
 
     <v-main>
-      <slot></slot>
+      <v-container>
+        <slot></slot>
+      </v-container>
     </v-main>
   </v-app>
 </template>
