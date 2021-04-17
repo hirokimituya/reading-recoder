@@ -1,0 +1,46 @@
+<template>
+  <v-card class="mx-auto mt-5" :class="{ linkable }" @click="onclick">
+    <v-row justify="space-between">
+      <v-col cols="4" md="2">
+        <v-img 
+          :src="book.image"
+          max-height="300"
+        ></v-img>
+      </v-col>
+      <v-col cols="8" md="9">
+        <ul>
+          <li v-if="index">{{ book.id }}.</li>
+          <li>{{ book.title }}（{{ book.price }}円）</li>
+          <li>{{ book.author }} 著</li>
+          <li>{{ book.publisher }} /刊</li>
+          <li>{{ book.published }} /発売</li>
+        </ul>
+      </v-col>
+    </v-row>
+  </v-card>
+</template>
+
+<script>
+export default {
+  name: 'book-info',
+  props: {
+    index: {
+      type: Number,
+    },
+    linkable: {
+      type: Boolean,
+      default: false,
+    },
+    book: {
+      type: Object
+    },
+  },
+  methods: {
+    onclick() {
+      if (this.linkable) {
+        this.$inertia.get(route('form', ['book', this.book.id]))
+      }
+    }
+  }
+}
+</script>
