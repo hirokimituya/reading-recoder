@@ -49,7 +49,6 @@
               label="感想"
               :rules="contentRules"
               :counter="255"
-              required
             ></v-textarea>
           </v-col>
         </v-row>
@@ -115,7 +114,7 @@ export default {
   props: {
     book: {
       type: Object,
-      require,
+      required: true,
     },
     comments: {
       type: Array,

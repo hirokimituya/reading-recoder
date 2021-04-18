@@ -20,12 +20,16 @@
     </v-row>
     <!-- マッチした書籍情報をリスト表示 -->
     <div class="text-center">
-    <v-progress-circular
-      v-show="progress"
-      indeterminate
-      color="teal"
-    >
-    </v-progress-circular>
+      <v-progress-circular
+        v-show="progress"
+        indeterminate
+        color="teal"
+      >
+      </v-progress-circular>
+    </div>
+    <div v-if="noresult" class="ml-16 mt-10">
+      <p>検索結果を取得できませんでした。</p>
+      <p>検索キーワードを変更して再度検索してください。</p>
     </div>
     <book-info
       v-for="(b, i) of books"
@@ -85,8 +89,10 @@ export default {
       books: [],
       progress: false,
       page: 1,
+      change_btn_flg: false,
       pageCount: 0,
       snackbar: false,
+      noresult: false,
     }
   },
   computed: {
@@ -95,22 +101,19 @@ export default {
     }
   },
   methods: {
-    async search() {
-      if (!this.keyword) {
-        this.snackbar = true
-        return false
-      }
-
+    async fetch() {
       this.progress = true
+      this.noresult = false
 
       this.books = []
 
-      if (this.keyword_change_flg) {
-        this.page = 1
-        this.keyword_change_flg = false
-      }
-
       const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${this.keyword}&startIndex=${this.index}`)
+
+      if (!response.data.items) {
+        this.noresult = true
+        this.progress = false
+        return
+      }
 
       this.pageCount = Math.ceil(response.data.totalItems / 10) - 30
 
@@ -130,11 +133,30 @@ export default {
       }
 
       this.progress = false
+    },
+    async search() {
+      if (!this.keyword) {
+        this.snackbar = true
+        return
+      }
+
+      if (this.keyword_change_flg && this.page != 1) {
+        this.change_btn_flg = true
+        this.page = 1
+      }
+
+      await this.fetch();
+
+      this.keyword_change_flg = false
     }
   },
   watch: {
-    page() {
-      this.search()
+    page(val) {
+      if (this.change_btn_flg && val == 1) {
+        this.change_btn_flg = false
+        return 
+      }
+      this.fetch()
       this.$vuetify.goTo(0)
     },
     keyword() {

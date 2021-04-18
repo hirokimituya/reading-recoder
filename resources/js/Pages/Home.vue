@@ -1,6 +1,6 @@
 <template>
     <layout>
-        <p class="ml-lg-16">{{ bookCount }}件の読書情報が記録されています。</p>
+        <p class="ml-lg-16 mt-5">{{ bookCount }}件の読書情報が記録されています。</p>
         <!-- 読書情報を一覧表示（キーはid）-->
         <book-info
             v-for="(b, i) of books"
