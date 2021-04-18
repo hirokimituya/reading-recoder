@@ -44,6 +44,18 @@
         :next-icon="mdiChevronRight"
         :prev-icon="mdiChevronLeft"
     ></v-pagination>
+
+    <!-- エラー通知 -->
+    <v-snackbar
+      v-model="snackbar"
+      right
+      top
+      :timeout="4000"
+      color="red"
+    >
+      <h4 class="h4">Reading Recoder</h4>
+      <p>検索キーワードを入力してください。</p>
+    </v-snackbar>
   </layout>
 </template>
 
@@ -59,15 +71,22 @@ export default {
     Layout,
     BookInfo 
   },
+  remember: [
+    'keyword',
+    'books',
+    'page',
+    'pageCount'
+  ],
   data() {
     return {
       mdiChevronRight, mdiChevronLeft,
-      keyword: 'vue.js',
+      keyword: '',
       keyword_change_flg: false,
       books: [],
       progress: false,
       page: 1,
       pageCount: 0,
+      snackbar: false,
     }
   },
   computed: {
@@ -77,6 +96,11 @@ export default {
   },
   methods: {
     async search() {
+      if (!this.keyword) {
+        this.snackbar = true
+        return false
+      }
+
       this.progress = true
 
       this.books = []
