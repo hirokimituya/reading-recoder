@@ -1,5 +1,6 @@
 const mix = require('laravel-mix')
 require('vuetifyjs-mix-extension')
+require('laravel-mix-bundle-analyzer');
 
 /*
  |--------------------------------------------------------------------------
@@ -19,3 +20,7 @@ mix.browserSync('reading-recoder.test')
     .vue()
     .webpackConfig(require('./webpack.config'))
     .version()
+
+if (!mix.inProduction()) {
+    mix.bundleAnalyzer();
+}
