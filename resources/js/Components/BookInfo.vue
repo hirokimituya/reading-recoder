@@ -5,8 +5,21 @@
         <v-row justify="space-between" align="center">
           <v-col cols="4" md="2">
             <v-img 
-              :src="book.image"
-            ></v-img>
+              :src="book.image || 'http://reading-recoder.test/storage/noimage.png'"
+              @load="image_load = true"
+            >
+              <v-row
+                class="fill-height ma-0"
+                align="center"
+                justify="center"
+              >
+                <v-progress-circular
+                  v-show="!image_load"
+                  indeterminate
+                  color="grey lighten-1"
+                ></v-progress-circular>
+              </v-row>
+            </v-img>
           </v-col>
           <v-col cols="8" md="9">
             <ul>
@@ -37,6 +50,11 @@ export default {
     book: {
       type: Object
     },
+  },
+  data() {
+    return {
+      image_load: false
+    }
   },
   methods: {
     onclick() {
