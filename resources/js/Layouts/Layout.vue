@@ -24,6 +24,7 @@
         <v-menu
           transition="slide-y-transition"
           bottom
+          offset-y
         >
           <template #activator="{ on, attrs }">
             <v-list-item
@@ -59,22 +60,49 @@
       <v-toolbar-title class="white--text row-pointer" @click="onLink('home')">Reading Recoder</v-toolbar-title>
     </v-app-bar>
 
-    <v-main>
+    <v-main v-scroll="onscroll">
       <v-container>
         <slot></slot>
+        <!-- 上に戻るボタン -->
+        <v-fab-transition>
+          <v-btn
+            v-scroll="onscroll"
+            v-show="btn_flg"
+            transition="fade-transition"
+            fab
+            large
+            fixed
+            right
+            bottom
+            color="green"
+            @click="$vuetify.goTo(0)"
+          >
+            <v-icon color="white">{{ mdiChevronUp }}</v-icon>
+          </v-btn>
+        </v-fab-transition>
       </v-container>
     </v-main>
+    <v-footer 
+      padless
+      class="mt-16"
+    >
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import { mdiMenu, mdiHome, mdiMagnify, mdiFaceAgent } from '@mdi/js';
+import { mdiMenu, mdiHome, mdiMagnify, mdiFaceAgent, mdiChevronUp } from '@mdi/js';
 
 export default {
   data() {
     return {
-      mdiMenu,
-      mdiFaceAgent,
+      mdiMenu, mdiFaceAgent, mdiChevronUp,
       drawer: null,
       right: null,
       items: [
@@ -85,6 +113,7 @@ export default {
         { title: 'Author', link: 'https://wings.msn.to/' },
         { title: 'Publisher', link: 'https://www.sbcr.jp/'  },
       ],
+      btn_flg: false,
     }
   },
   methods: {
@@ -93,6 +122,14 @@ export default {
         return false;
       }
       this.$inertia.get(route(link));
+    },
+    onscroll() {
+      if (window.scrollY > 500) {
+        this.btn_flg = true
+      }
+      else {
+        this.btn_flg = false
+      }
     }
   }
 }

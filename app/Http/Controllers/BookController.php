@@ -20,7 +20,7 @@ class BookController extends Controller
             'page' => $books['current_page'],
         ];
 
-        if ($request->snackbar == 'on') {
+        if (session('snackbar') == true) {
             $data['snackbar'] = true;
         }
         
@@ -39,26 +39,27 @@ class BookController extends Controller
         $data = [];
         if (!empty($book)) {
             $data['book'] = $book->toArray();
-
-            $b = $book->with('comments')->first()->toArray();
-            $data['comments'] = $b['comments'];
+            
+            $b = $book->comments()->get()->toArray();
+            $data['comments'] = $b;
         }
         else {
             $data['book'] = $request->all();
         }
-        logger($data);
 
         return Inertia::render('BookForm', $data);
     }
 
     public function register(CommentRequest $request) 
     {
-        if ($request->price == '-') {
-            $request_book_data = $request->except(['id', 'date', 'content', 'price']);
-        }
-        else {
-            $request_book_data = $request->except(['id', 'date', 'content']);
-        }
+        $request_book_data = [
+            'title' => $request->title,
+            'author' => $request->author,
+            'price' => is_int($request->price) ? $request->price : null,
+            'publisher' => $request->publishr,
+            'published' => date('Y-m-d', strtotime($request->published)),
+            'image' => $request->image,
+        ];
 
         $book = Book::firstOrCreate(
             ['id' => $request->id],
@@ -71,6 +72,6 @@ class BookController extends Controller
 
         $book->comments()->save($comment);
 
-        return redirect('/?snackbar=on');
+        return redirect()->route('home')->with('snackbar', true);
     }
 }

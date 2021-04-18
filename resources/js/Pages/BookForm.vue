@@ -144,7 +144,7 @@ export default {
         ...data,
         ...this.book,
       }))
-        .post(route('form'));
+        .post(route('form'), { preserveScroll: true });
 
       this.error = true
     }

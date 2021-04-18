@@ -106,15 +106,12 @@ export default {
       }
 
       this.progress = false
-    },
-    scrollToTop() {
-      window.scrollTo(0, 0);
     }
   },
   watch: {
     page() {
       this.search()
-      this.scrollToTop()
+      this.$vuetify.goTo(0)
     },
     keyword() {
       this.keyword_change_flg = true
