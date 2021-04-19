@@ -5,7 +5,7 @@
         <v-row justify="space-between" align="center">
           <v-col cols="4" md="2">
             <v-img 
-              :src="book.image || 'http://reading-recoder.test/storage/noimage.png'"
+              :src="book.image || '/storage/noimage.png'"
               @load="image_load = true"
             >
               <v-row

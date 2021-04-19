@@ -128,7 +128,7 @@ export default {
           price: price ? price.amount : '-',
           publisher: b.volumeInfo.publisher,
           published: b.volumeInfo.publishedDate,
-          image: img ? img.smallThumbnail : '',
+          image: img ? img.smallThumbnail.replace('http://', 'https://') : '',
         })
       }
 

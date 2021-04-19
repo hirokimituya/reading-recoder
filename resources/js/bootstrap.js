@@ -10,6 +10,12 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+axios.interceptors.request.use(request => {
+  request.url = request.url.replace(/https?:\/\/[^\/]*/, '')
+  console.log(request)
+  return request
+})
+
 window.axios.interceptors.response.use(
   response => response,
   error => error.response || error

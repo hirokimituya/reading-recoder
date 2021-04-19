@@ -121,7 +121,6 @@ export default {
       if (link == undefined) {
         return false;
       }
-      console.log('test' + route(link))
       this.$inertia.get(route(link));
     },
     onscroll() {

@@ -94,8 +94,8 @@
     >
       <v-icon class="d-inline">{{ mdiAlertOutline }}</v-icon>
       <h4 class="h4 d-inline">Reading Recoder</h4>
-      <div v-if="form.errors.date">{{ form.errors.date }}</div>
-      <div v-if="form.errors.content">{{ form.errors.content }}</div>
+      <div>{{ form.errors.date }}</div>
+      <div>{{ form.errors.content }}</div>
     </v-snackbar>
   </layout>
 </template>
@@ -143,9 +143,14 @@ export default {
         ...data,
         ...this.book,
       }))
-        .post(route('form'), { preserveScroll: true });
-
-      this.error = true
+        .post(route('form'), { 
+          preserveScroll: true,
+          onError: errors => {
+            if (errors.date || errors.content) {
+              this.error = true
+            }
+          },
+        });
     }
   }
 }
