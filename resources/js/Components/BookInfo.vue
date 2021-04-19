@@ -59,7 +59,7 @@ export default {
   methods: {
     onclick() {
       if (this.linkable) {
-        this.$inertia.get(route('form'), this.book)
+        this.$inertia.get('/form', this.book)
       }
     }
   }
