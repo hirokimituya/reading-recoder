@@ -143,7 +143,7 @@ export default {
         ...data,
         ...this.book,
       }))
-        .post('/form', { 
+        .post(route('form'), { 
           preserveScroll: true,
           onError: errors => {
             if (errors.date || errors.content) {

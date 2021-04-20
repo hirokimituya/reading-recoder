@@ -79,7 +79,7 @@ export default {
     },
     watch: {
         page_data(val) {
-            this.$inertia.get('/', {
+            this.$inertia.get(route('home'), {
                 'page': val,
             })
         }

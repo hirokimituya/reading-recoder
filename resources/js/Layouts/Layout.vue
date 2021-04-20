@@ -106,8 +106,8 @@ export default {
       drawer: null,
       right: null,
       items: [
-        { title: 'Home', icon: mdiHome, link: '/' },
-        { title: 'Search', icon: mdiMagnify, link: '/search' },
+        { title: 'Home', icon: mdiHome, link: 'home' },
+        { title: 'Search', icon: mdiMagnify, link: 'search' },
       ],
       subItems: [
         { title: 'Author', link: 'https://wings.msn.to/' },
@@ -121,7 +121,7 @@ export default {
       if (link == undefined) {
         return false;
       }
-      this.$inertia.get(link);
+      this.$inertia.get(route(link));
     },
     onscroll() {
       if (window.scrollY > 500) {
