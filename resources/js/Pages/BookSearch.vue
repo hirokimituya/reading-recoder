@@ -1,26 +1,26 @@
 <template>
   <layout>
     <!-- 検索フォームの定義 -->
-    <v-row class="mt-1 ml-lg-16">
-        <v-form>
-            <v-col cols="8" sm="6" md="4" lg="3">
-              <v-text-field 
-                label="キーワード"
-                v-model="keyword"
-              ></v-text-field>
-            </v-col>
-            <v-col>
-              <v-btn
-                color="green"
-                class="white--text"
-                type="submit"
-                @click="search"
-              >
-                検索
-              </v-btn>
-            </v-col>
-        </v-form>
-    </v-row>
+    <v-form>
+      <v-row class="mt-1 ml-lg-16">
+        <v-col cols="8" sm="6" md="4" lg="3">
+          <v-text-field 
+            label="キーワード"
+            v-model="keyword"
+          ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-btn
+            color="green"
+            class="white--text"
+            type="submit"
+            @click="search"
+          >
+            検索
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
     <!-- マッチした書籍情報をリスト表示 -->
     <div class="text-center">
       <v-progress-circular
