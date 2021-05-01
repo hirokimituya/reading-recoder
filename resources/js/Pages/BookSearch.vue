@@ -14,7 +14,7 @@
             color="green"
             class="white--text"
             type="submit"
-            @click="search"
+            @click.prevent="search()"
           >
             検索
           </v-btn>
