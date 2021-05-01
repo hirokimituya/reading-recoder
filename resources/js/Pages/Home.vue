@@ -68,7 +68,7 @@ export default {
     data() {
         return {
             mdiChevronRight, mdiChevronLeft,
-            page_data: this.prop,
+            page_data: this.page,
             success: this.snackbar,
         }
     },
