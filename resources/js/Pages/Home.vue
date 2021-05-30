@@ -69,13 +69,15 @@ export default {
         return {
             mdiChevronRight, mdiChevronLeft,
             page_data: this.page,
-            success: this.snackbar,
         }
     },
     computed:{
         pageCount() {
             return Math.ceil(this.bookCount / this.per_page);
-        }
+        },
+        success() {
+            return this.$browserBackFlg ? false : this.snackbar
+        },
     },
     watch: {
         page_data(val) {
