@@ -22,5 +22,5 @@ mix.browserSync('reading-recoder.test')
     .version()
 
 if (!mix.inProduction()) {
-    mix.bundleAnalyzer();
+//    mix.bundleAnalyzer();
 }

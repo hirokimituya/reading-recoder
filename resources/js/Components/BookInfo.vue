@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col cols="12" lg="10">
-      <v-card class="mx-auto mt-5" @click="onclick" :disabled="!linkable">
+      <v-card class="mx-auto mt-5" v-on:[eventName]="onclick">
         <v-row justify="space-between" align="center">
           <v-col cols="4" md="2">
             <v-img 
@@ -54,6 +54,11 @@ export default {
   data() {
     return {
       image_load: false
+    }
+  },
+  computed: {
+    eventName() {
+      return this.linkable ? 'click' : null
     }
   },
   methods: {
