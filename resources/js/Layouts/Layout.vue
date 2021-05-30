@@ -33,11 +33,11 @@
               v-on="on"
             >
               <v-list-item-icon>
-                <v-icon>{{ mdiFaceAgent }}</v-icon>
+                <v-icon>{{ mdiAccount }}</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title>Support</v-list-item-title>
+                <v-list-item-title>Author</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </template>
@@ -97,12 +97,12 @@
 </template>
 
 <script>
-import { mdiMenu, mdiHome, mdiMagnify, mdiFaceAgent, mdiChevronUp } from '@mdi/js';
+import { mdiMenu, mdiHome, mdiMagnify, mdiAccount, mdiChevronUp } from '@mdi/js';
 
 export default {
   data() {
     return {
-      mdiMenu, mdiFaceAgent, mdiChevronUp,
+      mdiMenu, mdiAccount, mdiChevronUp,
       drawer: null,
       right: null,
       items: [
@@ -110,8 +110,8 @@ export default {
         { title: 'Search', icon: mdiMagnify, link: 'search' },
       ],
       subItems: [
-        { title: 'Author', link: 'https://wings.msn.to/' },
-        { title: 'Publisher', link: 'https://www.sbcr.jp/'  },
+        { title: 'GitHub', link: 'https://github.com/hirokimituya/reading-recoder/' },
+        { title: 'Qiita', link: 'https://qiita.com/hirokimituya/'  },
       ],
       btn_flg: false,
     }
