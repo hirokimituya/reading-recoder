@@ -55,8 +55,8 @@ class BookController extends Controller
         $request_book_data = [
             'title' => $request->title,
             'author' => $request->author,
-            'price' => is_int($request->price) ? $request->price : null,
-            'publisher' => $request->publishr,
+            'price' => is_numeric($request->price) ? $request->price : null,
+            'publisher' => $request->publisher,
             'published' => date('Y-m-d', strtotime($request->published)),
             'image' => $request->image,
         ];
